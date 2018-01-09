@@ -3,6 +3,8 @@
 - This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.2.
 - With this app you can track things to do monthly and it's connected to a realtime database.
 
+![alt text](https://image.ibb.co/b9rnP6/todos.png)
+
 ## Setup
 
 - Clone: `git clone https://github.com/emelbye/monthly-todo.git`
