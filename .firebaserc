@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "mt": "monthly-todo",
+    "mt-test": "monthly-todo-test"
+  }
+}

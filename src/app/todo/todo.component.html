@@ -1,0 +1,55 @@
+<mat-card *ngIf="items">
+  <mat-card-header>
+    <mat-card-title>Add new todo</mat-card-title>
+  </mat-card-header>
+  <mat-form-field>
+    <mat-select [(ngModel)]="todo.item" placeholder="Select item..." [formControl]="itemControl" required>
+      <mat-option>--</mat-option>
+      <mat-option *ngFor="let item of items | async" [value]="item">
+        {{ item.name }}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="itemControl.hasError('required')">Please choose an item</mat-error>
+  </mat-form-field>
+  <dp-date-picker mode="month" [(ngModel)]="selectedDate" theme='dp-material' required></dp-date-picker>
+  <button *ngIf="itemControl.valid && selectedDate !== undefined" mat-mini-fab color="primary" matTooltip="Add" (click)="addTodo()">
+    <mat-icon>add</mat-icon>
+  </button>
+</mat-card>
+
+<mat-card *ngIf="items.length == 0">
+  <mat-chip-list>
+    <mat-chip color="warn" selected="true">No items found</mat-chip>
+  </mat-chip-list>
+</mat-card>
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      Todos list
+      &nbsp;&nbsp;
+      <button  mat-raised-button (click)="generateAutomaticTodos()" matTooltip="Generate Automatic Todos">GENERATE</button>
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-toolbar>
+    <button color="primary" mat-raised-button (click)="clearFilters()" matTooltip="Clear filters">All</button>
+    &nbsp;
+    <button color="primary" mat-raised-button (click)="filterExpired()" matTooltip="Expired To-dos">Expired</button>
+    &nbsp;
+    <button color="primary" mat-raised-button (click)="filterActual()" matTooltip="This month To-dos">Actual</button>
+    &nbsp;
+    <button color="primary" mat-raised-button (click)="filterNext()" matTooltip="Next months To-dos">Next</button>
+  </mat-toolbar>
+
+  <ag-grid-angular 
+    #agGrid style="width: 100%; height: 300px;" 
+    class="ag-theme-material" 
+    [gridOptions]="gridOptions" 
+    [columnDefs]="columnDefs" 
+    [rowData]="rowData" 
+    [context]="context" 
+    (gridReady)="onGridReady($event)">
+  </ag-grid-angular>
+
+</mat-card>

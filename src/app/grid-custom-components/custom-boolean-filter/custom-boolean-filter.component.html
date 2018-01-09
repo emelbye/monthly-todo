@@ -1,0 +1,10 @@
+<mat-checkbox 
+    [ngModel]="checked" 
+    (ngModelChange)="onChangeChecked($event)"
+    [indeterminate]="indeterminate">
+    Done
+</mat-checkbox>
+
+<button mat-button color="warn" matTooltip="Clear" (click)="clearFilter()">
+  Clear
+</button>
