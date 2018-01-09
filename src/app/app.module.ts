@@ -44,8 +44,8 @@ import { LoginComponent } from './login/login.component';
     AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [ 
-    { provide: ItemService, useClass: ItemServiceMock }, 
-    { provide: TodoService, useClass: TodoServiceMock },
+    { provide: ItemService, useClass: ItemService }, 
+    { provide: TodoService, useClass: TodoService },
     AngularFireAuth
   ],
   bootstrap: [AppComponent]
