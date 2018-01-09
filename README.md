@@ -20,7 +20,9 @@
 * What do you want to use as your public directory? dist (This is important! Angular creates the dist folder.)
 * Configure as a single-page app? Yes
 
-- Go to 'firebase console/Project Configuration/Add firebase to your web app' copy the config var and replace in your enviroments files. 
+- Go to 'firebase console/Project Configuration/Add firebase to your web app' copy the config var and replace in your enviroments files.
+
+- In 'fire base console/Authentication' choose the google authentication method and activate it.
 
 ## Development server
 
@@ -29,7 +31,7 @@
 
 ## Build
 
-Run `ng build --build-optimizer=false` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Run `ng build --build-optimizer=false` to build the project. The build artifacts will be stored in the `dist/` directory.
 
 ## Running unit tests
 
@@ -37,4 +39,5 @@ Run `ng test` (They aren't working because of the refactor to use the firebase s
 
 ## Deploy
 
-Run `firebase deploy`
+- Run `firebase deploy`
+- Open your web app (https://yourapp.firebaseapp.com)
