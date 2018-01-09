@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Setup
 
-Download this project with git: `git clone https://github.com/emelbye/monthly-todo.git`
+Clone: `git clone https://github.com/emelbye/monthly-todo.git`
 Run `npm install` to install dependencies
 Then you must create your firebase application (https://console.firebase.google.com)
 
