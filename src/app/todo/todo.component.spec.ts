@@ -15,166 +15,172 @@ import { AgGridModule } from 'ag-grid-angular';
 import { MatCheckboxGridModule } from '../grid-custom-components/mat-checkbox-grid/mat-checkbox-grid.module';
 
 import {
-  MatButtonModule,
-  MatMenuModule,
-  MatToolbarModule,
-  MatIconModule,
-  MatCardModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatTableModule,
-  MatTooltipModule,
-  MatOptionModule,
-  MatSelectModule,
-  MatNativeDateModule,
-  MatChipsModule,
-  MatCheckboxModule,
-  MatExpansionModule,
-  MatGridListModule,
-  MatListModule,
-  MatExpansionPanelDescription
+    MatButtonModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatTooltipModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatNativeDateModule,
+    MatChipsModule,
+    MatCheckboxModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatListModule,
+    MatExpansionPanelDescription
 } from '@angular/material';
 import { MatButtonGridRenderModule } from '../grid-custom-components/mat-button-grid-render/mat-button-grid-render.module';
 
 describe('TodoComponent', () => {
-  let component: TodoComponent;
-  let fixture: ComponentFixture<TodoComponent>;
+    let component: TodoComponent;
+    let fixture: ComponentFixture<TodoComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        DpDatePickerModule,
-        MatButtonModule,
-        MatIconModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatTableModule,
-        MatTooltipModule,
-        MatSelectModule,
-        MatChipsModule,
-        MatCheckboxModule,
-        MatExpansionModule,
-        BrowserAnimationsModule,
-        MatCheckboxGridModule,
-        MatButtonGridRenderModule,
-        MatToolbarModule,
-        AgGridModule.withComponents([])
-      ],
-      declarations: [ TodoComponent ],
-      providers: [
-        { provide: ItemService, useClass: ItemServiceMock }, 
-        { provide: TodoService, useClass: TodoServiceMock }
-      ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                CommonModule,
+                FormsModule,
+                ReactiveFormsModule,
+                DpDatePickerModule,
+                MatButtonModule,
+                MatIconModule,
+                MatCardModule,
+                MatFormFieldModule,
+                MatInputModule,
+                MatTableModule,
+                MatTooltipModule,
+                MatSelectModule,
+                MatChipsModule,
+                MatCheckboxModule,
+                MatExpansionModule,
+                BrowserAnimationsModule,
+                MatCheckboxGridModule,
+                MatButtonGridRenderModule,
+                MatToolbarModule,
+                AgGridModule.withComponents([])
+            ],
+            declarations: [TodoComponent],
+            providers: [
+                { provide: ItemService, useClass: ItemServiceMock },
+                { provide: TodoService, useClass: TodoServiceMock }
+            ]
+        })
+            .compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(TodoComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(TodoComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 
-  it('should get items', fakeAsync(() => {
-    component.ngOnInit();
-    tick();
-    fixture.detectChanges();
-    expect(component.rowData.length).toBe(4);
-  }));
+    it('should get items', fakeAsync(() => {
+        component.ngOnInit();
+        tick();
+        fixture.detectChanges();
+        expect(component._items.length).toBe(4);
+    }));
 
-  it('should get all todos', fakeAsync(() => {
-    component.ngOnInit();
-    tick();
-    fixture.detectChanges();
-    expect(component.todos.length).toBe(3);
-  }));
+    it('should get all todos', fakeAsync(() => {
+        component.ngOnInit();
+        tick();
+        fixture.detectChanges();
+        expect(component.rowData.length).toBe(3);
+    }));
 
 
-  it('should get a todo by id', () => {
-    let todo = component.getTodoByKey('1');
-    expect(todo).toBeDefined();
-    expect(todo.key).toBe('1');
-  });
+    it('should get a todo by id', () => {
+        let todo = component.getTodoByKey('bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbb1');
+        expect(todo).toBeDefined();
+        expect(todo.key).toBe('bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbb1');
+    });
 
-  it('should add a todo', () => {
-    component.todo = new Todo();
-    component.todo.done = true;
-    component.todo.date = new Date('11/01/2017').getTime();
-    component.todo.item = {key: '1', name : 'Item name 1', auto : true };
+    it('should add a todo', () => {
 
-    let addedTodo = component.addTodo();
+        let today = new Date('11/01/2017').getTime();
+        component.todo = new Todo();
+        component.todo.done = true;
+        component.todo.date = today;
+        component.todo.item = { key: 'keyx', name: 'Item name 1', auto: true, amount: 0 };
 
-    expect(component.todos.length).toBe(4);
-    
-    let newTodo = component.getTodoByKey(addedTodo.key);
-    expect(newTodo).toBeDefined();
-    expect(newTodo.done).toBeTruthy();
-    expect(newTodo.date).toEqual(new Date('11/01/2017').getTime());
-    expect(newTodo.item).toBeDefined();
-    expect(newTodo.item.key).toBe('bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbb1');
-    expect(newTodo.item.name).toBe('Item name 1');
-  });
+        let addedTodo = component.addTodo();
 
-  it('should update a todo', () => {
-    let todo = component.getTodoByKey('bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbb1');
-    expect(todo).toBeDefined();
+        expect(component.rowData.length).toBe(4);
 
-    todo.done = true;
-    todo.date = new Date('12/27/2017').getTime();
-    todo.item = { key: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa5', name : 'New Item', auto : false};
+        let newTodo = component.getTodoByKey(addedTodo.key);
+        expect(newTodo).toBeDefined();
+        expect(newTodo.done).toBeTruthy();
+        expect(newTodo.date).toEqual(today);
+        expect(newTodo.item).toBeDefined();
+        expect(newTodo.item.key).toBe('keyx');
+        expect(newTodo.item.name).toBe('Item name 1');
+        expect(newTodo.item.auto).toBeTruthy();
+    });
 
-    component.updateTodo(todo.key,todo);
+    it('should update a todo', () => {
+        let today = new Date('12/27/2017').getTime();
+        let todo = component.getTodoByKey('bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbb1');
+        expect(todo).toBeDefined();
 
-    let updatedTodo = component.getTodoByKey('bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbb1');
-    expect(updatedTodo).toBeDefined();
-    expect(updatedTodo.done).toBeTruthy();
-    expect(updatedTodo.date).toEqual(new Date('12/27/2017').getTime());
-    expect(updatedTodo.item).toBeDefined();
-    expect(updatedTodo.item.key).toBe('aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa5');
-    expect(updatedTodo.item.name).toBe('New Item');
-    expect(updatedTodo.item.auto).toBeFalsy();
-  });
+        todo.done = true;
+        todo.date = today;
+        todo.item = { key: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa5', name: 'New Item', auto: false, amount: 0 };
 
-  it('should remove a todo', () => {
-    component.removeTodo(3);
-    expect(component.todos.length).toBe(2);
-    let todo = component.getTodoByKey('3');
-    expect(todo).toBeUndefined();
-  });
+        component.updateTodo(todo.key, todo);
 
-  it('should format date', () => {
-    let date1  = new Date('12/15/2017').getTime();
-    expect(component.formatDate(date1)).toBe('12/2017');
+        let updatedTodo = component.getTodoByKey('bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbb1');
+        expect(updatedTodo).toBeDefined();
+        expect(updatedTodo.done).toBeTruthy();
+        expect(updatedTodo.date).toEqual(today);
+        expect(updatedTodo.item).toBeDefined();
+        expect(updatedTodo.item.key).toBe('aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa5');
+        expect(updatedTodo.item.name).toBe('New Item');
+        expect(updatedTodo.item.auto).toBeFalsy();
+    });
 
-    let date2 = new Date('03/15/2017').getTime();
-    expect(component.formatDate(date2)).toBe('03/2017');
-  });
+    it('should remove a todo', () => {
+        component.removeTodo('bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbb1');
+        let todo = component.getTodoByKey('bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbb1');
 
-  it('should add autogenerate todos', () => {
-    let todos = component.todos.length + 2;
-    let today = new Date();
-    component.generateAutomaticTodos();
-    expect(component.todos.length).toBe(todos);
+        expect(todo).toBeUndefined();
+    });
 
-    let todo1 = component.todos[todos-2];
-    expect(todo1.date.getMonth()).toBe(today.getMonth());
-    expect(todo1.date.getFullYear()).toBe(today.getFullYear());
-    expect(todo1.item.id).toBe(2);
-    expect(todo1.done).toBeFalsy();
+    it('should format date', () => {
+        let date1 = new Date('12/15/2017').getTime();
+        expect(component.formatDate(date1)).toBe('12/2017');
 
-    let todo2 = component.todos[todos-1];
-    expect(todo2.date.getMonth()).toBe(today.getMonth());
-    expect(todo2.date.getFullYear()).toBe(today.getFullYear());
-    expect(todo2.item.id).toBe(4);
-    expect(todo2.done).toBeFalsy();
-  });
+        let date2 = new Date('03/15/2017').getTime();
+        expect(component.formatDate(date2)).toBe('03/2017');
+    });
+
+    /*
+    it('should add autogenerate todos', () => {
+      let todos = component.rowData.length + 2;
+      let today = new Date();
+      component.generateAutomaticTodos();
+      expect(component.rowData.length).toBe(todos);
   
+      let todo1 = component.rowData[todos-2];
+      expect(todo1.date.getMonth()).toBe(today.getMonth());
+      expect(todo1.date.getFullYear()).toBe(today.getFullYear());
+      expect(todo1.item.id).toBe(2);
+      expect(todo1.done).toBeFalsy();
+  
+      let todo2 = component.rowData[todos-1];
+      expect(todo2.date.getMonth()).toBe(today.getMonth());
+      expect(todo2.date.getFullYear()).toBe(today.getFullYear());
+      expect(todo2.item.id).toBe(4);
+      expect(todo2.done).toBeFalsy();
+    });
+    */
+
 });

@@ -6,28 +6,28 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('CustomBooleanFilterComponent', () => {
-  let component: CustomBooleanFilterComponent;
-  let fixture: ComponentFixture<CustomBooleanFilterComponent>;
+    let component: CustomBooleanFilterComponent;
+    let fixture: ComponentFixture<CustomBooleanFilterComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ CustomBooleanFilterComponent ],
-      imports : [ 
-        FormsModule,
-        MatCheckboxModule,
-        BrowserAnimationsModule
-      ] 
-    })
-    .compileComponents();
-  }));
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [CustomBooleanFilterComponent],
+            imports: [
+                FormsModule,
+                MatCheckboxModule,
+                BrowserAnimationsModule
+            ]
+        })
+            .compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(CustomBooleanFilterComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(CustomBooleanFilterComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

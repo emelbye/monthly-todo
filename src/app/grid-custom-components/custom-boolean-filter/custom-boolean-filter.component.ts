@@ -3,14 +3,14 @@ import { AgFilterComponent } from 'ag-grid-angular';
 import { IDoesFilterPassParams, IFilterParams, IAfterGuiAttachedParams } from 'ag-grid';
 
 @Component({
-  selector: 'app-custom-boolean-filter',
-  templateUrl: './custom-boolean-filter.component.html',
-  styleUrls: ['./custom-boolean-filter.component.scss']
+    selector: 'app-custom-boolean-filter',
+    templateUrl: './custom-boolean-filter.component.html',
+    styleUrls: ['./custom-boolean-filter.component.scss']
 })
-export class CustomBooleanFilterComponent  implements AgFilterComponent {
+export class CustomBooleanFilterComponent implements AgFilterComponent {
 
-  private params : IFilterParams;
-    private valueGetter : any;
+    private params: IFilterParams;
+    private valueGetter: any;
     public checked: boolean = false;
     public indeterminate: boolean = true;
 
@@ -23,44 +23,50 @@ export class CustomBooleanFilterComponent  implements AgFilterComponent {
     }
 
     onChangeChecked(newValue): void {
-      this.checked = newValue;
-      this.indeterminate = false;
-      this.params.filterChangedCallback();
+        this.checked = newValue;
+        this.indeterminate = false;
+        this.params.filterChangedCallback();
+
+        this.params.context.componentParent.updateAmount();
     }
 
-    clearFilter(){
-      this.indeterminate = true;
-      this.checked = false;
-      this.params.filterChangedCallback();
+    clearFilter() {
+        this.checked = false;
+        this.indeterminate = true;
+        this.params.filterChangedCallback();
+
+        this.params.context.componentParent.updateAmount();
     }
 
     onChangeIndeterminate(newValue): void {
-      if (this.indeterminate !== newValue) {
-          this.indeterminate = newValue;
-          this.checked = false;
-          this.params.filterChangedCallback();
-      }
+        if (this.indeterminate !== newValue) {
+            this.indeterminate = newValue;
+            this.checked = false;
+            this.params.filterChangedCallback();
+
+            this.params.context.componentParent.updateAmount();
+        }
     }
 
     doesFilterPass(params: IDoesFilterPassParams): boolean {
 
-        let dateCellValue : boolean = this.valueGetter(params.node);
+        let dateCellValue: boolean = this.valueGetter(params.node);
 
-        if(this.indeterminate)
-          return true;
+        if (this.indeterminate)
+            return true;
 
-        if(this.checked && dateCellValue)
-          return true;
-        else if(this.checked && !dateCellValue)
-          return false;
-        else if(!this.checked && dateCellValue)
-          return false;
-        else if(!this.checked && !dateCellValue)
-          return true;
+        if (this.checked && dateCellValue)
+            return true;
+        else if (this.checked && !dateCellValue)
+            return false;
+        else if (!this.checked && dateCellValue)
+            return false;
+        else if (!this.checked && !dateCellValue)
+            return true;
     }
 
     getModel() {
-        return {value: this.checked};
+        return { value: this.checked };
     }
 
     setModel(model: any): void {

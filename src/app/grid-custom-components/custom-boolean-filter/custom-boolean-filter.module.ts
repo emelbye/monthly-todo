@@ -6,15 +6,15 @@ import { MatCheckboxModule, MatButtonModule, MatIconModule } from '@angular/mate
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatCheckboxModule,
-    MatButtonModule,
-    MatIconModule,
-    BrowserAnimationsModule
-  ],
-  entryComponents: [CustomBooleanFilterComponent],
-  declarations: [CustomBooleanFilterComponent]
+    imports: [
+        CommonModule,
+        FormsModule,
+        MatCheckboxModule,
+        MatButtonModule,
+        MatIconModule,
+        BrowserAnimationsModule
+    ],
+    entryComponents: [CustomBooleanFilterComponent],
+    declarations: [CustomBooleanFilterComponent]
 })
 export class CustomBooleanFilterModule { }

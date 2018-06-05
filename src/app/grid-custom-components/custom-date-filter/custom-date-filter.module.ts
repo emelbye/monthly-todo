@@ -6,14 +6,14 @@ import { MatInputModule, MatFormFieldModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatInputModule,
-    MatFormFieldModule,
-    BrowserAnimationsModule
-  ],
-  entryComponents: [CustomDateFilterComponent],
-  declarations: [ CustomDateFilterComponent ]
+    imports: [
+        CommonModule,
+        FormsModule,
+        MatInputModule,
+        MatFormFieldModule,
+        BrowserAnimationsModule
+    ],
+    entryComponents: [CustomDateFilterComponent],
+    declarations: [CustomDateFilterComponent]
 })
 export class CustomDateFilterModule { }

@@ -6,18 +6,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AgGridModule } from 'ag-grid-angular';
 import { AngularFireModule } from 'angularfire2';
 import {
-  MatButtonModule,
-  MatIconModule,
-  MatCardModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatTableModule,
-  MatTooltipModule,
-  MatSelectModule,
-  MatChipsModule,
-  MatCheckboxModule,
-  MatExpansionModule,
-  MatToolbarModule
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatTooltipModule,
+    MatSelectModule,
+    MatChipsModule,
+    MatCheckboxModule,
+    MatExpansionModule,
+    MatToolbarModule
 } from '@angular/material';
 
 import { TodoComponent } from './todo.component';
@@ -28,31 +28,31 @@ import { MatCheckboxGridModule } from '../grid-custom-components/mat-checkbox-gr
 import { environment } from '../../environments/environment';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    DpDatePickerModule,
-    MatButtonModule,
-    MatIconModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatTableModule,
-    MatTooltipModule,
-    MatChipsModule,
-    MatCheckboxModule,
-    MatExpansionModule,
-    MatToolbarModule,
-    MatSelectModule,
-    BrowserAnimationsModule,
-    AgGridModule.withComponents([]),
-    MatCheckboxGridModule,
-    MatButtonGridRenderModule,
-    CustomDateFilterModule,
-    CustomBooleanFilterModule,
-    AngularFireModule.initializeApp(environment.firebase)
-  ],
-  declarations: [TodoComponent]
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        DpDatePickerModule,
+        MatButtonModule,
+        MatIconModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatTableModule,
+        MatTooltipModule,
+        MatChipsModule,
+        MatCheckboxModule,
+        MatExpansionModule,
+        MatToolbarModule,
+        MatSelectModule,
+        BrowserAnimationsModule,
+        AgGridModule.withComponents([]),
+        MatCheckboxGridModule,
+        MatButtonGridRenderModule,
+        CustomDateFilterModule,
+        CustomBooleanFilterModule,
+        AngularFireModule.initializeApp(environment.firebase)
+    ],
+    declarations: [TodoComponent]
 })
 export class TodoModule { }

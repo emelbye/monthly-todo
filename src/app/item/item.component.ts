@@ -8,79 +8,94 @@ import { MatCheckboxGridComponent } from '../grid-custom-components/mat-checkbox
 import { MatButtonGridRenderComponent } from '../grid-custom-components/mat-button-grid-render/mat-button-grid-render.component';
 
 @Component({
-  selector: 'app-item',
-  templateUrl: './item.component.html',
-  styleUrls: ['./item.component.scss']
+    selector: 'app-item',
+    templateUrl: './item.component.html',
+    styleUrls: ['./item.component.scss']
 })
 export class ItemComponent implements OnInit {
 
-  public item : Item = new Item();
-  public context;
-  
-  gridApi: GridApi;
-  gridColumnApi;
-  columnDefs;
-  rowData;
-  gridOptions: GridOptions;
+    public item: Item = new Item();
+    public context;
 
-  constructor(private itemService: ItemService) {
+    gridApi: GridApi;
+    gridColumnApi;
+    columnDefs;
+    rowData;
+    gridOptions: GridOptions;
 
-    this.context = { componentParent: this };
+    constructor(private itemService: ItemService) {
 
-    this.gridOptions = <GridOptions>{};
-    this.gridOptions.enableFilter = true;
-    this.gridOptions.enableSorting = true;
-    this.gridOptions.rowSelection = 'simple';
+        this.context = { componentParent: this };
 
-    this.columnDefs = [
-      { headerName: 'Key', field: 'key', hide: true },
-      { headerName: 'Name', field: 'name', filter: 'text' },
-      { headerName: 'Auto', field: 'auto', filterFramework: CustomBooleanFilterComponent, cellRendererFramework: MatCheckboxGridComponent, width: 125 },
-	    { headerName: '', suppressFilter: true, cellRendererFramework: MatButtonGridRenderComponent, width: 75 }
-    ];
-  }
+        this.gridOptions = <GridOptions>{};
+        this.gridOptions.enableFilter = true;
+        this.gridOptions.enableSorting = true;
+        this.gridOptions.rowSelection = 'simple';
 
-  ngOnInit(): void {
-    this.items.subscribe(itemList => 
-      this.rowData = itemList
-    );
-  }
+        this.columnDefs = [
+            { headerName: 'Key', field: 'key', hide: true },
+            { headerName: 'Name', field: 'name', filter: 'text' },
+            { headerName: 'Amount', field: 'amount', filter: 'number', editable: true, cellRenderer: (params) => this.renderPeso(params) },
+            { headerName: 'Auto', field: 'auto', filterFramework: CustomBooleanFilterComponent, cellRendererFramework: MatCheckboxGridComponent, width: 125 },
+            { headerName: '', suppressFilter: true, cellRendererFramework: MatButtonGridRenderComponent, width: 75 }
+        ];
+    }
 
-  get items(): any{
-    return this.itemService.getItems();
-  }
-  
-  getItemByKey(key){
-    return this.itemService.getItemByKey(key);
-  }
+    ngOnInit(): void {
+        this.items.subscribe(itemList =>
+            this.rowData = itemList
+        );
+    }
 
-  removeItem(key) {
-    this.itemService.deleteItemByKey(key);
-  }
+    get items(): any {
+        return this.itemService.getItems();
+    }
 
-  addItem(){
-    let addedItem = this.itemService.addItem(this.item);
-    this.item = new Item();
-    return addedItem;
-  }
+    getItemByKey(key) {
+        return this.itemService.getItemByKey(key);
+    }
 
-  updateItem(key, values){
-    this.itemService.updateItemByKey(key, values);
-  }
+    removeItem(key) {
+        this.itemService.deleteItemByKey(key);
+    }
 
-  // Call from MatCheckboxGridComponent for auto field
-  updateFromComponent(key, checked){
-    this.updateItem(key,  { auto : checked });
-  }
+    addItem() {
+        let addedItem = this.itemService.addItem(this.item);
+        this.item = new Item();
+        return addedItem;
+    }
 
-  // Call from MatButtonGridRenderComponent
-  removeFromComponent(key){
-    this.removeItem(key);
-  }
+    updateItem(key, values) {
+        this.itemService.updateItemByKey(key, values);
+    }
 
-  onGridReady(params) {
-    this.gridApi = params.api;
-    this.gridColumnApi = params.columnApi;
-    this.gridColumnApi.autoSizeColumns();
-  }
+    // Call from MatCheckboxGridComponent for auto field
+    updateFromComponent(key, checked) {
+        this.updateItem(key, { auto: checked });
+    }
+
+    // Call from MatButtonGridRenderComponent
+    removeFromComponent(key) {
+        this.removeItem(key);
+    }
+
+    onGridReady(params) {
+        this.gridApi = params.api;
+        this.gridColumnApi = params.columnApi;
+        this.gridColumnApi.autoSizeColumns();
+    }
+
+    renderPeso(params: any) {
+        if (params.value)
+            return '$ ' + params.value;
+        else
+            return '$ 0';
+    }
+
+    onCellValueChanged(params: any) {
+        var colId = params.column.getId();
+        if (colId === 'amount') {
+            this.updateItem(params.data.key, params.data);
+        }
+    }
 }

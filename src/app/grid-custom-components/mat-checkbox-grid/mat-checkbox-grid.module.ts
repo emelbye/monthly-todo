@@ -5,12 +5,12 @@ import { MatCheckboxModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    MatCheckboxModule,
-    FormsModule
-  ],
-  entryComponents: [MatCheckboxGridComponent],
-  declarations: [MatCheckboxGridComponent]
+    imports: [
+        CommonModule,
+        MatCheckboxModule,
+        FormsModule
+    ],
+    entryComponents: [MatCheckboxGridComponent],
+    declarations: [MatCheckboxGridComponent]
 })
 export class MatCheckboxGridModule { }

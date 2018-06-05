@@ -1,25 +1,25 @@
 <div *ngIf="afAuth.authState | async as user;">
-	<mat-toolbar #toolbar1 color="primary">
-		<mat-icon>done</mat-icon>
-		<span>Monthly Todo</span>
-		<span class="example-spacer"></span>
-		<button mat-button [mat-menu-trigger-for]="menu">
-			<mat-icon>menu</mat-icon>
-		</button>
-		&nbsp;
-		<button mat-button (click)="logout()">
-			<mat-icon>exit_to_app</mat-icon>
-		</button>
-	</mat-toolbar>
-		
-	<mat-menu #menu="matMenu">
-		<a routerLink="/items" routerLinkActive="active" mat-menu-item>Items</a>
-		<a routerLink="/todos" routerLinkActive="active" mat-menu-item>Todo</a>
-	</mat-menu>
+    <mat-toolbar #toolbar1 color="primary">
+        <mat-icon>done</mat-icon>
+        <span>Monthly Todo</span>
+        <span class="example-spacer"></span>
+        <button mat-button [mat-menu-trigger-for]="menu">
+            <mat-icon>menu</mat-icon>
+        </button>
+        &nbsp;
+        <button mat-button (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon>
+        </button>
+    </mat-toolbar>
 
-	<mat-toolbar>
-		<span>Welcome, {{user.displayName}}&nbsp;&nbsp;</span>
-	</mat-toolbar>
+    <mat-menu #menu="matMenu">
+        <a routerLink="/items" routerLinkActive="active" mat-menu-item>Items</a>
+        <a routerLink="/todos" routerLinkActive="active" mat-menu-item>Todo</a>
+    </mat-menu>
+
+    <mat-toolbar>
+        <span>Welcome, {{user.displayName}}&nbsp;&nbsp;</span>
+    </mat-toolbar>
 </div>
 
 <router-outlet>

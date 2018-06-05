@@ -5,14 +5,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AgGridModule } from 'ag-grid-angular';
 import { AngularFireModule } from 'angularfire2';
 import {
-  MatButtonModule,
-  MatIconModule,
-  MatCardModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatTableModule,
-  MatTooltipModule,
-  MatCheckboxModule
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatTooltipModule,
+    MatCheckboxModule
 } from '@angular/material';
 
 import { ItemComponent } from './item.component';
@@ -22,24 +22,24 @@ import { environment } from '../../environments/environment';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatButtonModule,
-    MatIconModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatTableModule,
-    MatTooltipModule,
-    MatCheckboxModule,
-    BrowserAnimationsModule,
-    MatCheckboxGridModule,
-    MatButtonGridRenderModule,
-    AgGridModule.withComponents([]),
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule
-  ],
-  declarations: [ItemComponent]
+    imports: [
+        CommonModule,
+        FormsModule,
+        MatButtonModule,
+        MatIconModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatTableModule,
+        MatTooltipModule,
+        MatCheckboxModule,
+        BrowserAnimationsModule,
+        MatCheckboxGridModule,
+        MatButtonGridRenderModule,
+        AgGridModule.withComponents([]),
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireDatabaseModule
+    ],
+    declarations: [ItemComponent]
 })
 export class ItemModule { }

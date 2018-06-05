@@ -7,35 +7,35 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class ItemService {
 
-  public items: Observable<Item[]>;
-  private itemsRef: AngularFireList<any>;
+    public items: Observable<Item[]>;
+    private itemsRef: AngularFireList<any>;
 
-  constructor(private db: AngularFireDatabase) {
-    this.itemsRef = db.list('items');
-    this.items = this.itemsRef.snapshotChanges().map(changes => {
-        return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
-    });
-  }
+    constructor(private db: AngularFireDatabase) {
+        this.itemsRef = db.list('items');
+        this.items = this.itemsRef.snapshotChanges().map(changes => {
+            return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+        });
+    }
 
-  getItems() : Observable<Item[]>{
-    return this.items;
-  }
+    getItems(): Observable<Item[]> {
+        return this.items;
+    }
 
-  getItemByKey(key : string): Item {
-      throw new Error("Method not implemented.");
-  }
+    getItemByKey(key: string): Item {
+        throw new Error("Method not implemented.");
+    }
 
-  addItem(item: Item): Item {
-     this.itemsRef.push(item);
-     return item;
-  }
+    addItem(item: Item): Item {
+        this.itemsRef.push(item);
+        return item;
+    }
 
-  deleteItemByKey(key: string) {
-     this.itemsRef.remove(key);
-  }
+    deleteItemByKey(key: string) {
+        this.itemsRef.remove(key);
+    }
 
-  updateItemByKey(key: string, values: Object) {
-    this.itemsRef.update(key, values);
-  }
+    updateItemByKey(key: string, values: Object) {
+        this.itemsRef.update(key, values);
+    }
 
 }

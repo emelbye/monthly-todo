@@ -7,7 +7,7 @@ import { IAfterGuiAttachedParams, ICellRendererParams } from "ag-grid";
     templateUrl: './mat-checkbox-grid.html'
 })
 export class MatCheckboxGridComponent implements ICellRendererAngularComp {
-    
+
     private params: any;
     public checked: boolean = false;
 
@@ -21,7 +21,7 @@ export class MatCheckboxGridComponent implements ICellRendererAngularComp {
     }
 
     afterGuiAttached?(params?: IAfterGuiAttachedParams): void {
-        
+
     }
 
     onChange(checked: boolean) {
@@ -30,5 +30,7 @@ export class MatCheckboxGridComponent implements ICellRendererAngularComp {
 
         let key = this.params.data.key;
         this.params.context.componentParent.updateFromComponent(key, checked);
+        
+        this.params.context.componentParent.updateAmount();
     }
 }

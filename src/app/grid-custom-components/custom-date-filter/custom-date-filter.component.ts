@@ -3,13 +3,13 @@ import { IFilterParams, RowNode, IDoesFilterPassParams, IAfterGuiAttachedParams 
 import { AgFilterComponent } from 'ag-grid-angular';
 
 @Component({
-  selector: 'app-custom-date-filter',
-  templateUrl: 'custom-date-filter.component.html'
+    selector: 'app-custom-date-filter',
+    templateUrl: 'custom-date-filter.component.html'
 })
 export class CustomDateFilterComponent implements AgFilterComponent {
-    
-    private params : IFilterParams;
-    private valueGetter : any;
+
+    private params: IFilterParams;
+    private valueGetter: any;
     public text: string = '';
     public filterType: FilterType;
 
@@ -18,80 +18,84 @@ export class CustomDateFilterComponent implements AgFilterComponent {
         this.valueGetter = params.valueGetter;
     }
 
-    onChange(newValue){
+    onChange(newValue) {
         this.filter(newValue, FilterType.Contains);
     }
 
-    filter(newValue, filterType){
+    filter(newValue, filterType) {
         this.filterType = filterType;
         this.text = newValue;
         this.params.filterChangedCallback();
+
+        this.params.context.componentParent.updateAmount();
     }
 
-    clearFilter(){
+    clearFilter() {
         this.text = '';
         this.params.filterChangedCallback();
+
+        this.params.context.componentParent.updateAmount();
     }
 
     doesFilterPass(params: IDoesFilterPassParams): boolean {
 
-        let date : Date = new Date(this.valueGetter(params.node));
+        let date: Date = new Date(this.valueGetter(params.node));
 
-        if(this.filterType == FilterType.Contains)
+        if (this.filterType == FilterType.Contains)
             return this.filterContains(date);
-        if(this.filterType == FilterType.Lesser)
+        if (this.filterType == FilterType.Lesser)
             return this.filterLesser(date);
-        if(this.filterType == FilterType.Greater)
+        if (this.filterType == FilterType.Greater)
             return this.filterGreater(date);
-        if(this.filterType == FilterType.Equals)
+        if (this.filterType == FilterType.Equals)
             return this.filterEquals(date);
     }
 
-    filterContains(cellValue : Date){
+    filterContains(cellValue: Date) {
         let monthFilter = new Number(this.text.split('/')[0]).toString();
-        let monthValue = (cellValue.getMonth()+1).toString();
+        let monthValue = (cellValue.getMonth() + 1).toString();
 
-        if(this.text.split('/').length == 1){
+        if (this.text.split('/').length == 1) {
             return monthValue == monthFilter;
         }
-        else{
+        else {
             let yearFilter = this.text.split('/')[1];
             let yearValue = cellValue.getFullYear().toString();
             return (monthValue == monthFilter) && (yearValue.indexOf(yearFilter) > -1);
         }
     }
 
-    filterEquals(cellValue : Date){
+    filterEquals(cellValue: Date) {
         let monthFilter = (new Number(this.text.split('/')[0])).toString();
-        let monthValue = (cellValue.getMonth()+1).toString();
+        let monthValue = (cellValue.getMonth() + 1).toString();
         let yearFilter = this.text.split('/')[1];
         let yearValue = cellValue.getFullYear().toString();
 
         return ((yearFilter == yearValue) && (monthFilter == monthValue))
     }
 
-    filterLesser(cellValue : Date){
-        let today : Date = new Date();
-        if(cellValue.getFullYear() < today.getFullYear())
+    filterLesser(cellValue: Date) {
+        let today: Date = new Date();
+        if (cellValue.getFullYear() < today.getFullYear())
             return true;
-        if(cellValue.getFullYear() > today.getFullYear())
+        if (cellValue.getFullYear() > today.getFullYear())
             return false;
-        if(cellValue.getMonth() < cellValue.getMonth())
+        if (cellValue.getMonth() < cellValue.getMonth())
             return true;
     }
 
-    filterGreater(cellValue : Date){
-        let today : Date = new Date();
-        if(cellValue.getFullYear() > today.getFullYear())
+    filterGreater(cellValue: Date) {
+        let today: Date = new Date();
+        if (cellValue.getFullYear() > today.getFullYear())
             return true;
-        if(cellValue.getFullYear() < today.getFullYear())
+        if (cellValue.getFullYear() < today.getFullYear())
             return false;
-        if(cellValue.getMonth() > today.getMonth())
+        if (cellValue.getMonth() > today.getMonth())
             return true;
     }
 
     getModel() {
-        return {value: this.text};
+        return { value: this.text };
     }
 
     setModel(model: any): void {

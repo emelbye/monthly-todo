@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AppComponent } from './app.component';
+import { AppComponent, routes } from './app.component';
 import { ItemModule } from './item/item.module';
 import { TodoModule } from './todo/todo.module';
 import { ItemComponent } from './item/item.component';
@@ -19,35 +19,30 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { LoginComponent } from './login/login.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent
-  ],
-  imports: [
-    ItemModule,
-    TodoModule,
-    BrowserModule,
-    MatIconModule,
-    MatMenuModule,
-    MatToolbarModule,
-    MatCardModule,
-    BrowserAnimationsModule,
-    RouterModule.forRoot(
-      [
-        { path: '', component: AppComponent },
-        { path: 'todos', component : TodoComponent},
-        { path: 'items', component: ItemComponent },
-        { path: 'login', component: LoginComponent }
-      ], 
-      { useHash: false }
-    ),
-    AngularFireModule.initializeApp(environment.firebase)
-  ],
-  providers: [ 
-    { provide: ItemService, useClass: ItemService }, 
-    { provide: TodoService, useClass: TodoService },
-    AngularFireAuth
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        LoginComponent
+    ],
+    imports: [
+        ItemModule,
+        TodoModule,
+        BrowserModule,
+        MatIconModule,
+        MatMenuModule,
+        MatToolbarModule,
+        MatCardModule,
+        BrowserAnimationsModule,
+        RouterModule.forRoot(
+            routes,
+            { useHash: false }
+        ),
+        AngularFireModule.initializeApp(environment.firebase)
+    ],
+    providers: [
+        { provide: ItemService, useClass: ItemService },
+        { provide: TodoService, useClass: TodoService },
+        AngularFireAuth
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,13 +5,13 @@ import { MatButtonGridRenderComponent } from './mat-button-grid-render.component
 import { MatButtonModule, MatIconModule } from '@angular/material';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatButtonModule,
-    MatIconModule
-  ],
-  entryComponents: [MatButtonGridRenderComponent],
-  declarations: [ MatButtonGridRenderComponent ]
+    imports: [
+        CommonModule,
+        FormsModule,
+        MatButtonModule,
+        MatIconModule
+    ],
+    entryComponents: [MatButtonGridRenderComponent],
+    declarations: [MatButtonGridRenderComponent]
 })
 export class MatButtonGridRenderModule { }

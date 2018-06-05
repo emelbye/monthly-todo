@@ -1,27 +1,24 @@
 <mat-card>
-  <mat-card-header>
-    <mat-card-title>Add new item</mat-card-title>
-  </mat-card-header>
-  <mat-form-field>
-    <input matInput [(ngModel)]="item.name" placeholder="Name" dividerColor="accent" required>
-  </mat-form-field>
-  <mat-checkbox [(ngModel)]="item.auto">Automatic</mat-checkbox>
-  <button mat-mini-fab color="primary" (click)="addItem()" matTooltip="Add {{item.name}}">
-    <mat-icon>add</mat-icon>
-  </button>  
+    <mat-card-header>
+        <mat-card-title>Add new item</mat-card-title>
+    </mat-card-header>
+    <mat-form-field>
+        <input matInput [(ngModel)]="item.name" placeholder="Name" dividerColor="accent" required>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput [(ngModel)]="item.amount" placeholder="Amount" dividerColor="accent" required>
+    </mat-form-field>
+    <mat-checkbox [(ngModel)]="item.auto">Automatic</mat-checkbox>
+    <button mat-mini-fab color="primary" (click)="addItem()" matTooltip="Add {{item.name}}">
+        <mat-icon>add</mat-icon>
+    </button>
 </mat-card>
 
 <mat-card>
-  <mat-card-header>
-    <mat-card-title>Item list</mat-card-title>
-  </mat-card-header>
-  <ag-grid-angular 
-    #agGrid style="width: 100%; height: 300px;" 
-    class="ag-theme-material" 
-    [gridOptions]="gridOptions" 
-    [columnDefs]="columnDefs" 
-    [rowData]="rowData" 
-    [context]="context" 
-    (gridReady)="onGridReady($event)">
-  </ag-grid-angular>
+    <mat-card-header>
+        <mat-card-title>Item list</mat-card-title>
+    </mat-card-header>
+    <ag-grid-angular #agGrid style="width: 100%; height: 300px;" class="ag-theme-material" [gridOptions]="gridOptions" [columnDefs]="columnDefs"
+        [rowData]="rowData" [context]="context" (gridReady)="onGridReady($event)" (cellValueChanged)="onCellValueChanged($event)">
+    </ag-grid-angular>
 </mat-card>

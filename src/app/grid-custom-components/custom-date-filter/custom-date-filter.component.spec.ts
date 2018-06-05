@@ -6,29 +6,29 @@ import { MatInputModule, MatFormFieldModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('CustomDateFilterComponent', () => {
-  let component: CustomDateFilterComponent;
-  let fixture: ComponentFixture<CustomDateFilterComponent>;
+    let component: CustomDateFilterComponent;
+    let fixture: ComponentFixture<CustomDateFilterComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        FormsModule,
-        MatInputModule,
-        MatFormFieldModule,
-        BrowserAnimationsModule
-      ],
-      declarations: [ CustomDateFilterComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                FormsModule,
+                MatInputModule,
+                MatFormFieldModule,
+                BrowserAnimationsModule
+            ],
+            declarations: [CustomDateFilterComponent]
+        })
+            .compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(CustomDateFilterComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(CustomDateFilterComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

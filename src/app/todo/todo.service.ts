@@ -6,34 +6,34 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class TodoService {
 
-  private todos: Observable<Todo[]>;
-  private todosRef: AngularFireList<any>;
+    private todos: Observable<Todo[]>;
+    private todosRef: AngularFireList<any>;
 
-  constructor(private db: AngularFireDatabase) {
-    this.todosRef = db.list('todos');
-    this.todos = this.todosRef.snapshotChanges().map(changes => {
-        return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
-    });
-  }
+    constructor(private db: AngularFireDatabase) {
+        this.todosRef = db.list('todos');
+        this.todos = this.todosRef.snapshotChanges().map(changes => {
+            return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+        });
+    }
 
-  getTodos():Observable<Todo[]>{
-    return this.todos;
-  }
+    getTodos(): Observable<Todo[]> {
+        return this.todos;
+    }
 
-  getTodoByKey(key: string): Todo {
-    throw new Error("Method not implemented.");
-  }
+    getTodoByKey(key: string): Todo {
+        throw new Error("Method not implemented.");
+    }
 
-  addTodo(todo: Todo): Todo {
-    this.todosRef.push(todo);
-    return todo;
-  }
+    addTodo(todo: Todo): Todo {
+        this.todosRef.push(todo);
+        return todo;
+    }
 
-  deleteTodoByKey(key: string) {
-    this.todosRef.remove(key);
-  }
+    deleteTodoByKey(key: string) {
+        this.todosRef.remove(key);
+    }
 
-  updateTodoByKey(key: string, values: Object) {
-    this.todosRef.update(key, values);
-  }
+    updateTodoByKey(key: string, values: Object) {
+        this.todosRef.update(key, values);
+    }
 }

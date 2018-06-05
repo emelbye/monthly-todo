@@ -4,17 +4,17 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
 
-  constructor(public afAuth: AngularFireAuth, private router: Router) { }
+    constructor(public afAuth: AngularFireAuth, private router: Router) { }
 
-  login() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then((data) => {
-      this.router.navigate(['']);
-    })
-  }
+    login() {
+        this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then((data) => {
+            this.router.navigate(['']);
+        })
+    }
 }
